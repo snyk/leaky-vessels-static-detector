@@ -1,0 +1,33 @@
+{
+  "name": "gh-enumerator",
+  "version": "1.0.0",
+  "type": "module",
+  "exports": "./script.js",
+  "bin": {
+    "prodsec-enumerator": "./cli.js"
+  },
+  "description": "An Octoherd script to collect Dockerfiles",
+  "scripts": {
+    "start": "node cli.js",
+    "test": "node script.js"
+  },
+  "keywords": [
+    "octoherd-script"
+  ],
+  "author": "Dragos Cojocari",
+  "license": "ISC",
+  "dependencies": {
+    "@octoherd/cli": "^3.4.11",
+    "@octokit/rest": "^19.0.7",
+    "axios": "^1.6.4",
+    "github-url-to-object": "^4.0.6",
+    "is-glob": "^4.0.3",
+    "js-yaml": "^4.1.0",
+    "minimatch": "^5.1.0"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ]
+  }
+}

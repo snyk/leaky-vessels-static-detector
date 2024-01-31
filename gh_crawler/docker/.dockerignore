@@ -1,0 +1,5 @@
+node_modules
+cache
+gh_data
+.DS_Store
+README.md

@@ -1,0 +1,45 @@
+version: 2.1
+
+parameters:
+  run-static-scans:
+    type: boolean
+    default: true
+
+builder_img: &builder_img
+  resource_class: small
+  docker:
+    - image: cimg/base:2022.08
+
+commands:
+  docker_login:
+    description: Setup docker
+    steps:
+      - setup_remote_docker:
+          docker_layer_caching: false
+
+jobs:
+  static_scans:
+    <<: *builder_img
+    steps:
+      - checkout
+      - docker_login
+      - run:
+          name: Build Docker image
+          command: |
+            docker build . -t static-detector:${CIRCLE_SHA1} -f gh_crawler/docker/Dockerfile
+      - run:
+          name: Static Scans
+          command: |
+            export TARGET_ORG=test-org
+            docker run -e GH_TOKEN -e TARGET_ORG -e DH_USERNAME -e DH_PASSWORD_OR_PAT -e GOOGLE_SERVICE_ACCOUNT_JSON -e GOOGLE_SERVICE_ACCOUNT_JSON static-detector:${CIRCLE_SHA1}
+
+workflows:
+  version: 2
+
+  static-scans:
+    when: << pipeline.parameters.run-static-scans >>
+    jobs:
+      - static_scans:
+          name: Run static scans
+          context:
+            - static-detector-context
