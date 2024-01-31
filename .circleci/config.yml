@@ -6,7 +6,7 @@ orbs:
 defaults: &defaults
   resource_class: small
   docker:
-    - image: cimg/node:18.18.2
+    - image: cimg/go:1.21.6-node
 
 jobs:
   security_scans:
