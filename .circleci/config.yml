@@ -1,7 +1,20 @@
 version: 2.1
 
 orbs:
-  prodsec: snyk/prodsec-orb@1.0
+  prodsec: snyk/prodsec-orb@1
+
+defaults: &defaults
+  resource_class: small
+  docker:
+    - image: cimg/node:18.18.2
+
+jobs:
+  security_scans:
+    <<: *defaults
+    steps:
+      - checkout
+      - prodsec/security_scans:
+          mode: auto
 
 workflows:
   version: 2
@@ -12,3 +25,7 @@ workflows:
           context:
             - snyk-bot-slack
           channel: alerts-security-labs
+      - security_scans:
+          name: Security Scans
+          context:
+            - security-labs-snyk
