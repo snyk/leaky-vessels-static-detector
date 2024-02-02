@@ -122,6 +122,7 @@ export async function script(
   }
 
   for (const item of filesToDownload) {
+    // deepcode ignore PT: expected behavior
     await downloadFile(octokit, repository, output, item);
   }
 }
