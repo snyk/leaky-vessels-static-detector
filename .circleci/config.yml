@@ -16,6 +16,15 @@ jobs:
       - prodsec/security_scans:
           mode: auto
 
+  build_crawler:
+    <<: *defaults
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: false
+      - run:
+          command: docker build . -f gh_crawler/docker/Dockerfile -t static-scanner:latest
+
 workflows:
   version: 2
   CICD:
@@ -29,3 +38,5 @@ workflows:
           name: Security Scans
           context:
             - security-labs-snyk
+      - build_crawler:
+          name: Build Crawler Image
