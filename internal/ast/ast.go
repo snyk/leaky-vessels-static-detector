@@ -19,6 +19,7 @@ package ast
 import (
 	"bytes"
 	"errors"
+	"regexp"
 	"slices"
 	"strings"
 
@@ -30,6 +31,9 @@ import (
 var log = common.GetLogger()
 
 func Parse(input string) (*parser.Result, error) {
+	re := regexp.MustCompile("(?m)[\r\n]+^LABEL .*$")
+	input = re.ReplaceAllString(input, "")
+
 	tree, err := parseWithSyntax(input)
 	if err != nil {
 		return nil, err
