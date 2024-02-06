@@ -1,4 +1,4 @@
-module static-detector
+module github.com/synk/leaky-vessels-static-detector
 
 go 1.21.5
 
