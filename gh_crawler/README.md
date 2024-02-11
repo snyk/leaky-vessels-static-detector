@@ -6,7 +6,7 @@
    - `TARGET_ORG`: the name of the GitHUb organisation to crawl, example `snyk`
    - `GH_TOKEN`: a GitHub token with read permissions on all the repositories
    - `DH_USERNAME`: (Optional) Docker hub username to access base image history from Dockerhub
-   - `DH_PASSWORD_OR_PAT`: (Optional) Docker hub passwor to access base image history from Dockerhub
+   - `DH_PASSWORD_OR_PAT`: (Optional) Docker hub password to access base image history from Dockerhub
    - `GOOGLE_SERVICE_ACCOUNT_JSON`: (Optional) Google Cloud SA key for accessing the container registry
 
 ### Running from Code

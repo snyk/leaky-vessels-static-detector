@@ -44,8 +44,8 @@ func setupCommonFlags() {
 	for _, fs := range []*flag.FlagSet{imageSubcmd, dockerfileSubcmd} {
 		fs.BoolVar(&debug, "debug", false, "Enable debug logs.")
 		fs.StringVar(&envFilePath, "env", "", "Path to .env file.")
-		fs.StringVar(&disable, "disable", "", 
-			`Comma-seperated list of rule ids to turn off. List of rule Ids: 
+		fs.StringVar(&disable, "disable", "",
+			`Comma-separated list of rule ids to turn off. List of rule Ids:
 1 - runc process.cwd & Leaked fds Container Breakout [CVE-2024-21626]
 2 - Buildkit Mount Cache Race: Build-time Race Condition Container Breakout [CVE-2024-23651]
 3 - Buildkit GRPC SecurityMode Privilege Check [CVE-2024-23653]
