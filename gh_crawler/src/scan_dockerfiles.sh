@@ -25,26 +25,28 @@ done
 GH_DATA=gh_data
 DOCKERFILES=`cat ${GH_DATA}/${TARGET_ORG}/list.csv`
 SCAN_LOG=${GH_DATA}/${TARGET_ORG}_scan.log
+SCAN_REPORT_TSV=${GH_DATA}/${TARGET_ORG}_scan_report.tsv
 
 rm -f ${SCAN_LOG}
 
 result=0
+
+echo -e "Dockerfile\tResult\tMessage" | tee ${SCAN_REPORT_TSV}
 for dockerfile in ${DOCKERFILES}; do
     echo Scanning ${dockerfile} ... #>> ${SCAN_LOG}
     ./static-detector dockerfile -f ${dockerfile} --dockerhub  --disable=1,3 #>> ${SCAN_LOG} 2>&1
     res=$?
     if [ $res -eq 0 ]; then
-        echo "${dockerfile} ... no issues"
+        echo -e "${dockerfile}\t0\tno issues" | tee -a ${SCAN_REPORT_TSV}
     elif [ $res -eq 1 ]; then
-        echo "${dockerfile} ... issues found"
-        result=1
+        echo -e "${dockerfile}\t1\tissues found" | tee -a ${SCAN_REPORT_TSV}
     elif [ $res -eq 2 ]; then
-        echo "${dockerfile} ... error parsing dockerfile"
+        echo -e "${dockerfile}\t2\terror parsing dockerfile" | tee -a ${SCAN_REPORT_TSV}
     elif [ $res -eq 3 ]; then
-        echo "${dockerfile} ... no issues in dockerfile but could not verify base image"
+        echo -e "${dockerfile}\t3\tno issues in dockerfile but could not verify base image" | tee -a ${SCAN_REPORT_TSV}
     else
-        echo "${dockerfile} ... unknown exit code"
+        echo -e "${dockerfile}\t${res}\tunknown exit code" | tee -a ${SCAN_REPORT_TSV}
     fi
-done
+done 
 
 exit ${result}
