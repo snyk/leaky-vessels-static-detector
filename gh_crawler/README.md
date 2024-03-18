@@ -22,7 +22,7 @@
 1. Build the container image:
    `docker build . -f gh_crawler/docker/Dockerfile -t static-scanner:latest`
 1. Run the container image:
-   `docker run -e TARGET_ORG -e GH_TOKEN -e DH_USERNAME -e DH_PASSWORD_OR_PAT -e GOOGLE_SERVICE_ACCOUNT_JSON static-detector:latest`
+   `docker run -e TARGET_ORG -e GH_TOKEN -e DH_USERNAME -e DH_PASSWORD_OR_PAT -e GOOGLE_SERVICE_ACCOUNT_JSON static-scanner:latest`
 
 #### CircleCI Example
 
