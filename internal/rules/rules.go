@@ -36,7 +36,7 @@ var RULES = []common.Rule{
 		Name: "runc process.cwd & Leaked fds Container Breakout",
 		Blogpost: "https://snyk.io/blog/cve-2024-21626-runc-process-cwd-container-breakout",
 		Inst:        "WORKDIR",
-		ArgRegex:    regexp2.MustCompile("/proc/self/fd/", 0),
+		ArgRegex:    regexp2.MustCompile("/proc/self/fd", 0),
 	},
 	common.Rule{
 		ID: 2,
