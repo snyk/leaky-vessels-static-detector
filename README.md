@@ -11,7 +11,7 @@ A static analysis based exploit detector for runc and Docker vulnerabilities.
 CVE-2024-21626 is a vulnerability in the `runc` container runtime allowing an attacker to break out of the container isolation and achieve full root RCE via a crafted image that exploits an issue within the `WORKDIR` instruction's handling. Since there's a "race" condition between the time some file descriptors to the host are opened and closed, an attacker can create a Dockerfile with the following instruction `WORKDIR /proc/self/fd/[ID]` (with ID being a system dependent file descriptor) that will point to the underlying host machine's file system. This can be exploited when running:
 
 1. `docker build` - In 2 cases:
-   - When the Dockerfile being built contains the exploit triggerting instruction.
+   - When the Dockerfile being built contains the exploit triggering instruction.
    - When the Dockerfile being built refers to a base image via the `FROM` instruction that contains an `ONBUILD` command triggering the exploit e.e. `ONBUILD WORKDIR /proc/self/fd/[ID]`. The `ONBUILD` instruction injects the command not in the image that contains it but in the image that uses it as a base image. This means that if a base image is compromised or intentionally nefarious i.e. hosted on Dockerhub or other public container registries, exploitation if possible even if nothing changes in the image that the `docker build` command actually builds.
 2. `docker run`
 
@@ -156,5 +156,3 @@ Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 ## License
 
 Leaky Vessels Static Detector is under the Apache 2.0 License. See [LICENSE](LICENSE) for more information.
-
-
