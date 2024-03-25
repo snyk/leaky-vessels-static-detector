@@ -34,7 +34,7 @@ result=0
 echo -e "Dockerfile\tResult\tMessage" | tee ${SCAN_REPORT_TSV}
 for dockerfile in ${DOCKERFILES}; do
     echo Scanning ${dockerfile} ... #>> ${SCAN_LOG}
-    ./static-detector dockerfile -f ${dockerfile} --dockerhub  --disable=1,3 #>> ${SCAN_LOG} 2>&1
+    ./static-detector dockerfile -f ${dockerfile} --base  --disable=1,3 #>> ${SCAN_LOG} 2>&1
     res=$?
     if [ $res -eq 0 ]; then
         echo -e "${dockerfile}\t0\tno issues" | tee -a ${SCAN_REPORT_TSV}
