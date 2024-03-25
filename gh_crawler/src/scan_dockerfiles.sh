@@ -47,6 +47,6 @@ for dockerfile in ${DOCKERFILES}; do
     else
         echo -e "${dockerfile}\t${res}\tunknown exit code" | tee -a ${SCAN_REPORT_TSV}
     fi
-done 
+done
 
 exit ${result}
