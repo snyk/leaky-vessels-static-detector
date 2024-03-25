@@ -63,9 +63,15 @@ func (d *DaemonAnalyzer) Setup() (error) {
     }
 
 	if !isLocal {
-		errMsg := fmt.Sprintf("%s is not found in local docker daemon images list.", d.ImageName)
-		log.Error(errMsg)
-		return errors.New(errMsg)
+		dbgMsg := fmt.Sprintf("Image not found locally, downloading it now from %s", d.ImageName)
+		log.Debug(dbgMsg)
+		reader, err := cli.ImagePull(context.Background(), d.ImageName, types.ImagePullOptions{})
+		if err != nil {
+			errMsg := fmt.Sprintf("Failed to pull image %s: %v", d.ImageName, err)
+			log.Error(errMsg)
+			return errors.New(errMsg)
+		}
+		defer reader.Close()
 	}
 
 	dbgMsg := fmt.Sprintf("Getting docker image layer history for %s", d.ImageName)
