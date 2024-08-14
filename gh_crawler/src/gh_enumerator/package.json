@@ -19,7 +19,7 @@
   "dependencies": {
     "@octoherd/cli": "^3.4.11",
     "@octokit/rest": "^19.0.7",
-    "axios": "^1.6.4",
+    "axios": "^1.7.4",
     "github-url-to-object": "^4.0.6",
     "is-glob": "^4.0.3",
     "js-yaml": "^4.1.0",
