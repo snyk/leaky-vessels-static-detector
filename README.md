@@ -130,7 +130,7 @@ gcloud iam service-accounts keys create [FILENAME] --iam-account=[SERVICE_ACCOUN
 
 ### Return values
 
-- `0` - Successful, now rules were matched.
+- `0` - Successful, no rules were matched.
 - `1` - Successful, found matches.
 - `2` - Failed, an unknown error occurred.
 - `3` - Failed at base image analysis.
