@@ -32,7 +32,7 @@ This vulnerability only affects the `docker build` command.
 CVE-2024-23652 is an arbitrary deletion vulnerability in Docker. When `RUN --mount` is used in a Dockerfile, if the target of the mount does not exist it will be created for that environment. When the execution completes, this created directory will be cleaned up. If the executing command changes the path used for the mount to a symbolic link, the cleanup procedure will traverse this symbolic link and potentially clean up arbitrary directories in the host root filesystem.
 This vulnerability only affects the `docker build` command.
 
-For a dynamic eBPF-based detection approach, please see [this](https://github.com/snyk/leaky-vessels-runtime-detector).
+For a dynamic eBPF-based detection approach, please see [this](https://github.com/snyk/leaky-vessels-dynamic-detector).
 
 ## Features
 
