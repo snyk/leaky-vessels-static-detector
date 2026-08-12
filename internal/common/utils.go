@@ -64,14 +64,19 @@ func GetJson(url string, token string) (string, error){
 	}
   
 	res, err := client.Do(req)
+	if err != nil {
+		errMsg := fmt.Sprintf("HTTP request failed: %s\n", err)
+		log.Debug(errMsg)
+		return "", errors.New(errMsg)
+	}
+	defer res.Body.Close()
+
 	resBody, err := io.ReadAll(res.Body)
 	if err != nil {
 		errMsg := fmt.Sprintf("Could not read response body: %s\n", err)
 		log.Debug(errMsg)
 		return "", errors.New(errMsg)
 	}
-
-	defer res.Body.Close()
 
 	switch res.StatusCode{
 	case 200:
@@ -99,14 +104,19 @@ func PostJson(url string, body string, token string) (string, error) {
 	}
   
 	res, err := client.Do(req)
+	if err != nil {
+		errMsg := fmt.Sprintf("HTTP request failed: %s\n", err)
+		log.Debug(errMsg)
+		return "", errors.New(errMsg)
+	}
+	defer res.Body.Close()
+
 	resBody, err := io.ReadAll(res.Body)
 	if err != nil {
 		errMsg := fmt.Sprintf("Could not read response body: %s\n", err)
 		log.Debug(errMsg)
 		return "", errors.New(errMsg)
 	}
-
-	defer res.Body.Close()
 
 	switch res.StatusCode{
 	case 200:
